@@ -295,9 +295,9 @@ exports.getTwitter = function(req, res, next) {
   var result = [];
   var data = [];
   // pull module and authentication
-  var Twitter = require('twitter');
+  var Twit = require('twit');
   var token = _.find(req.user.tokens, { kind: 'twitter' });
-  var client = new Twitter({
+  var client = new Twit({
     consumer_key: secrets.twitter.consumerKey,
     consumer_secret: secrets.twitter.consumerSecret,
     access_token_key: token.accessToken,

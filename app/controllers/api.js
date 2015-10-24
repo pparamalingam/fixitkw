@@ -596,6 +596,7 @@ exports.getInstagram = function(req, res, next) {
   ig.use({ access_token: secrets.instagram.accessToken });
 
   //This has to be rewritten
+  /*
   async.each(intersections,function(item, callback){
   		ig.media_search(item.lat, item.lon, {distance: 500},function(err, medias, remaining, limit){
 			for (x=0; x<medias.length; x++){
@@ -611,6 +612,7 @@ exports.getInstagram = function(req, res, next) {
 		obj
 	);
   });
+  */
 }
   	/*}
   }, function(err, results) {

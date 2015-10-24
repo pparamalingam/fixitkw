@@ -21,7 +21,7 @@
 
 module.exports = {
 
-  db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://168.235.144.28/triplecomma',
+  db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://159.203.30.16//fixitkw',
 
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
 
@@ -72,8 +72,8 @@ module.exports = {
   },
 
   twitter: {
-    consumerKey: process.env.TWITTER_KEY || '6NNBDyJ2TavL407A3lWxPFKBI',
-    consumerSecret: process.env.TWITTER_SECRET  || 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa',
+    consumerKey: process.env.TWITTER_KEY || 'a7bNGd06DBFz1vFqYvvfcrVYZ',
+    consumerSecret: process.env.TWITTER_SECRET  || '0ocil7vMLRqfV6FlLs1Q0265SD6Q7MQ53UfwtAtAqUAPWZMpVT',
     callbackURL: '/auth/twitter/callback',
     passReqToCallback: true
   },

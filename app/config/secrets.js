@@ -58,8 +58,8 @@ module.exports = {
 
   instagram: {
 	accessToken: '34408716.1677ed0.bbc38d94fdff422387e553aa5b1706c3',
-    clientID: process.env.INSTAGRAM_ID || '0721eb1d40f546a7a5e9ba2a994746ae',
-    clientSecret: process.env.INSTAGRAM_SECRET || '7092d26c6cbf4d90b56bd70b210a8324',
+    clientID: process.env.INSTAGRAM_ID || '8c0ef2619b6242ecbbcb03759ed6c8a2',
+    clientSecret: process.env.INSTAGRAM_SECRET || 'aa5b79de537b4815836a39a907ea081f',
     callbackURL: '/auth/instagram/callback',
     passReqToCallback: true
   },

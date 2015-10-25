@@ -92,6 +92,8 @@ function getTweets(callback){
     });
 }
 
+
+
 /* Code that connect with twitter and streams data into database */
 
 //Defining access tokens, Get this by creating new twitter application
@@ -102,6 +104,16 @@ var T = new Twit({
     access_token_secret:  "R3J1BgrLSUcYayHMXSXpYtlf03wBqF0nBumGa8NgBHy8S"
 })
 
+function sendTweet(username, id){
+    T.post('statuses/update', { status: "@" + username + ", you didn't toggle precise coordinates. Please resend with coordinates so that we can locate the problem.",  in_reply_to_status: id }, function(err, data, response) {
+        if (err){
+            console.log("Error");
+            console.log("err");
+        }
+        console.log(response);
+    })
+}
+
 //Creating a request variable and using stream function 
 var request = T.stream('statuses/filter', { track: 'fixitkw' })
 
@@ -110,19 +122,26 @@ request.on('tweet', function (tweet) {
     //Every client which is connected to our website is included in sockets
     //emit is to send data to client,We supplied tweet(json) as js object
     //Sockets will serialise tweet which is deserialised at client(template.html)
-    io.sockets.emit("tweet",tweet);
+    if (tweet.coordinates){
+        io.sockets.emit("tweet",tweet);
 
-    tweetCollection.insert(tweet,function(error){
-        if(error){
-            console.log(error);
-        }else{
-            console.log("Inserted into database");
-        }
-    });
+        tweetCollection.insert(tweet,function(error){
+            if(error){
+                console.log(error);
+            }else{
+                console.log("Inserted into database");
+            }
+        });
 
-    console.log(tweet.text);
-    console.log("\n");
+        console.log(tweet.text);
+        console.log("\n");
+    }
+    else{
+        sendTweet(tweet.user.screen_name, tweet.id)
+    }
 })
+
+
 
 //request.end(); 
 

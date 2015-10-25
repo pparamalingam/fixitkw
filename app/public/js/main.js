@@ -1,15 +1,32 @@
 var sid = [];
 var map;
+
+var markers = new Object();
+
+
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 43.411087, lng: -80.475802},
     zoom: 10
   });
 
+  function openMarker(id) {
+    console.log(markers[id])
+    google.maps.event.trigger(markers[id], 'click');
+  }
+
+
 dbtweets.forEach(function(entry){
-	setMarkerTweet(entry);
+    
+    $('#tweets').append('<li id="'+entry._id.toString()+'">' + "<strong>" + entry.user.screen_name + ":</strong> " + entry.text + ", " + entry.coordinates.coordinates[1] + " " + entry.coordinates.coordinates[0] +'</li>');
+	var li = document.getElementById(entry._id);
+    li.addEventListener('click', openMarker(entry._id));
+    setMarkerTweet(entry);
 });  
 }
+
+
 
 var setMarkerInsta = function(insta){
 	//console.log("We in the setMarker method")
@@ -23,6 +40,10 @@ var setMarkerInsta = function(insta){
 		title: 'Hello World!',
 		icon: image
 	}); 
+    marker.set("id", insta.id);
+
+    markers[marker.id] = marker;
+
 	var contentString = '<div id="content">'+
   		'<div id="siteNotice">'+
   		'</div>'+
@@ -49,6 +70,7 @@ var setMarkerInsta = function(insta){
 
 var hash = new Object();
 var callInsta = function() {
+    var ul = document.getElementById('tweets');
     $.ajax({
           type: "GET",
           url: "api/instagram",
@@ -58,6 +80,10 @@ var callInsta = function() {
             data.forEach(function(entry){
               if(hash[entry.id] == undefined){
                 // $("#fucku").append(entry.id); 
+                var li = document.createElement("li");
+                // li.innerHTML  = "<strong>" + entry.username + ":</strong> " + entry.text + ", " + " Coordinates: " + entry.longitude + " " + entry.latitude;
+                // ul.insertBefore(li,ul.getElementsByTagName("li")[0]);
+                $('#tweets').append('<li data-val="' + entry.id +'">' + "<strong>" + entry.username + ":</strong> " + entry.text + ", " + " Coordinates: " + entry.longitude + " " + entry.latitude +'</li>');
                 hash[entry.id] = 1
                 sid.push({lng: entry.longitude, lat: entry.latitude});
                 //console.log("Before setMarker method")
@@ -70,6 +96,7 @@ var callInsta = function() {
 }
 
 function setMarkerTweet(twoots){
+
 	var tLatLng
 	var image = {
 		url: 'images/twitter_mark.png'
@@ -80,7 +107,10 @@ function setMarkerTweet(twoots){
 		animation: google.maps.Animation.DROP,
 		title: 'Hello World!',
 		icon: image
-	}); 
+	});
+    marker.set("id", twoots._id);
+
+
 	var contentString = '<div id="content">'+
 	  '<div id="siteNotice">'+
 	  '</div>'+
@@ -125,11 +155,13 @@ $(document).ready(function() {
         callInsta();
 
         //Creating a li element
-        var li = document.createElement("li");
-        li.innerHTML  = "<strong>" + tweet.user.screen_name + ":</strong> " + tweet.text + " " + tweet.coordinates;
+        // var li = document.createElement("li");
+        // li.innerHTML  = "<strong>" + tweet.user.screen_name + ":</strong> " + tweet.text + " " + tweet.coordinates;
 
         //Insert ul at the top of the list
-        ul.insertBefore(li,ul.getElementsByTagName("li")[0]);
+        // ul.insertBefore(li,ul.getElementsByTagName("li")[0]);
+        $('#tweets').prepend('<li data-val="'+tweet._id+'">' + "<strong>" + tweet.user.screen_name + ":</strong> " + tweet.text + ", " + tweet.coordinates.coordinates[1] + " " + tweet.coordinates.coordinates[0] +'</li>');
+
 
         sid.push([{lng: tweet.coordinates.coordinates[0], lat: tweet.coordinates.coordinates[1]}]);
 

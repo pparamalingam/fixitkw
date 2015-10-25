@@ -12373,3 +12373,8 @@ footer p, footer ul {
   padding: 0;
   width: 100%;
 }
+
+#tweets {
+  max-height: 100px;
+  overflow-y: scroll;
+}

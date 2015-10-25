@@ -10,19 +10,25 @@ function initMap() {
 }
 
 var setMarker = function(insta){
+	console.log("We in the setMarker method")
+	var image = {
+		url: 'images/insta_mark.png'
+	}
 	var gLatLng = new google.maps.LatLng(insta.latitude, insta.longitude);
     var marker = new google.maps.Marker({
 		position: gLatLng,
 		animation: google.maps.Animation.DROP,
 		title: 'Hello World!',
+		icon: image
 	}); 
 	var contentString = '<div id="content">'+
   		'<div id="siteNotice">'+
   		'</div>'+
   		'<h1 id="firstHeading" class="firstHeading">'+ insta.username +'</h1>'+
   		'<div id="bodyContent">'+
-  		'<img src="'+ tweet.user.profile_image_url +'" alt="Smiley face" height="150" width="150">' +
+  		'<img src="'+ insta.profile_pic +'" alt="Smiley face" height="150" width="150">' +
   		'<p>'+ insta.text +'</p>'+
+  		'<img src="'+ insta.imaged +'" alt="Smiley face" height="640" width="640">' +
   		'</div>'+
   		'</div>';
 
@@ -32,7 +38,9 @@ var setMarker = function(insta){
 
 	  marker.addListener('click', function() {
 	    infowindow.open(map, marker);
-	  });	
+	  });
+
+	  marker.setMap(map);	
 
 }
 
@@ -49,6 +57,7 @@ var callInsta = function() {
                 $("#fucku").append(entry.id); 
                 hash[entry.id] = 1
                 sid.push({lng: entry.longitude, lat: entry.latitude});
+                console.log("Before setMarker method")
                 setMarker(entry);
                 console.log(sid);
               }

@@ -8,6 +8,11 @@ html
     title #{title} - Fixit Kitchener-Waterloo
     link(rel='stylesheet', href='/css/main.css')
     script(src='http://159.203.30.16:3020/socket.io/socket.io.js')
+    script(src='https://www.google.com/jsapi?.js')
+
+
+
+
   body
     include partials/header
 
@@ -20,6 +25,8 @@ html
     script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/main.js')
+
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAE9Dp1FV0bFYtdhiHJGNy5nWVoPFm9tX0&callback=initMap', async, defer)
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     script.

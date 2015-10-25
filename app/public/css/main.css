@@ -12366,3 +12366,10 @@ footer p, footer ul {
 .fa {
   margin-right: 6px;
 }
+
+#map {
+  height: 600px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

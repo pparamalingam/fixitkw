@@ -592,42 +592,70 @@ exports.getInstagram = function(req, res, next) {
   var count = 0;
   ig = require('instagram-node').instagram();
 
-  ig.use({ client_id: secrets.instagram.clientID, client_secret: secrets.instagram.clientSecret });
-  ig.use({ access_token: secrets.instagram.accessToken });
 
-  //This has to be rewritten
-  async.each(intersections,function(item, callback){
-  		ig.media_search(item.lat, item.lon, {distance: 500},function(err, medias, remaining, limit){
-			for (x=0; x<medias.length; x++){
-				obj.push([item.lat, item.lon, medias[x].location.latitude, medias[x].location.longitude, medias[x].tags]);
-			}
-			count++;
-			console.log(count);
-			callback();
-  		});
-	},
-  function(err){
-	 res.status('api/instagram').send(
-		obj
-	);
-  });
+  
+
+  ig.use({ client_id: secrets.instagram.clientID, client_secret: secrets.instagram.clientSecret });
+  ig.use({ access_token: secrets.instagram.accessToken});
+
+
+  var hdl = function(err, result, pagination, remaining, limit) {
+
+    async.each(result, function(item, callback) {
+
+      for (i=0; i<result.length; i++) {
+        if (result[i].location != null){
+          obj.push([result[i].location.latitude, result[i].location.longitude, result[i].name, result[i].username]);
+          console.log(result);
+
+        }
+      }
+
+    // Your implementation here
+      if(pagination.next) {
+        pagination.next(hdl); // Will get second page results
+      }
+    callback();
+    
+    },
+    
+    function(err) {
+      res.status('api/instagram').send(obj)
+      });
+  }
+  ig.tag_media_recent('fixitkw', hdl);
 }
-  	/*}
-  }, function(err, results) {
-    if (err) return next(err);
-	
-	for (x=0; x<results.mediaSearch.length; x++){
-		var fin = {};
-		//fin['tags']=results.mediaSearch[x].tags;
-		//fin['location']=results.mediaSearch[x].location;
-		obj.push([results.mediaSearch[x].location.latitude, results.mediaSearch[x].location.longitude]);
-	}
-	
-    res.status('api/instagram').send(
-		obj
-	);
-  });
-};
+
+  
+
+
+
+  // var midpoint = [{lat:43.459826, lon:-80.521550},
+  //     {lat:43.411087, lon:-80.475802}];
+
+    // var midpoint = [{lat:43.656134, lon:-79.380284}];
+      // {lat:, lon:}];
+
+  // async.each(midpoint, function(item, callback){
+  //   ig.media_search(item.lat, item.lon, {distance: 500},function(err, medias, remaining, limit){
+  //        console.log(medias)
+  //        console.log("Length: " + medias.length);
+
+  //        for (x=0; x<medias.length; x++){
+  //          obj.push([medias[x]]);
+  //        }
+  //        callback();
+  //       });
+  //   },
+  //   function(err){
+  //    res.status('api/instagram').send(
+  //    obj
+  //   );
+  //  });
+  // }
+
+
+
 
 /**
  * GET /api/yahoo

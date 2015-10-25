@@ -20,6 +20,59 @@ function initMap() {
     zoom: 10
   });
 }
+
+var setMarker = function(insta){
+	var gLatLng = new google.maps.LatLng(insta.latitude, insta.longitude);
+    var marker = new google.maps.Marker({
+		position: gLatLng,
+		animation: google.maps.Animation.DROP,
+		title: 'Hello World!',
+	}); 
+	var contentString = '<div id="content">'+
+  		'<div id="siteNotice">'+
+  		'</div>'+
+  		'<h1 id="firstHeading" class="firstHeading">'+ insta.username +'</h1>'+
+  		'<div id="bodyContent">'+
+  		'<img src="'+ tweet.user.profile_image_url +'" alt="Smiley face" height="150" width="150">' +
+  		'<p>'+ insta.text +'</p>'+
+  		'</div>'+
+  		'</div>';
+
+	  var infowindow = new google.maps.InfoWindow({
+	    content: contentString
+	  });
+
+	  marker.addListener('click', function() {
+	    infowindow.open(map, marker);
+	  });	
+
+}
+
+var hash = new Object();
+var callInsta = function() {
+    $.ajax({
+          type: "GET",
+          url: "api/instagram",
+          dataType: "json",
+          success: function(data){
+            // console.log(data[0].id);
+            data.forEach(function(entry){
+              if(hash[entry.id] == undefined){
+                $("#fucku").append(entry.id); 
+                hash[entry.id] = 1
+                sid.push({lng: entry.longitude, lat: entry.latitude});
+                setMarker(entry);
+                console.log(sid);
+              }
+            }); 
+          }
+        });
+}
+
+callInsta();
+// setInterval(callInsta, 30000000);
+
+
 $(document).ready(function() {
 
     // Place JavaScript code here...
@@ -31,6 +84,8 @@ $(document).ready(function() {
 
     //On tweet event (when we receave a tweet)
     socket.on('tweet',function (tweet) {
+
+        callInsta();
 
         //Creating a li element
         var li = document.createElement("li");

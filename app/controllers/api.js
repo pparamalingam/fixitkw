@@ -29,6 +29,21 @@ var querystring = require('querystring');
 
 var secrets = require('../config/secrets');
 
+var mongoose = require('mongoose');
+var db = mongoose.createConnection(secrets.db);
+
+var instagramCollection;
+
+db.on('error', function(err){
+    console.log("mongoose connection error: " + err );
+});
+
+db.once('open', function(){
+    console.log("OPEN MONGO CONNECTION");
+    mongoose.connection.db.collection("instagram", function (err, collection){
+        instagramCollection = collection
+    });
+});
 
 
 /**
@@ -603,8 +618,7 @@ exports.getInstagram = function(req, res, next) {
     async.each(result, function(item, callback) {
       // console.log(result.length);
       if (result[counter].location != null){
-        obj.push({id: result[counter].id});
-        // , result[counter].user.username, result[counter].user.full_name, result[counter].link, result[counter].location.latitude, result[counter].location.longitude
+        obj.push({id: result[counter].id, username: result[counter].user.username, full_name: result[counter].user.full_name, profile_pic: result[counter].user.profile_picture, text: result[counter].caption.text, tags: result[counter].tags, link: result[counter].link, latitude: result[counter].location.latitude, longitude: result[counter].location.longitude});
         console.log(result[counter]);
       }
       counter++
@@ -619,12 +633,27 @@ exports.getInstagram = function(req, res, next) {
     
     function(err) {
       res.status('api/instagram').send(obj);
+      //Set insert to db
+      obj.forEach(function(entry){
+        instagramCollection.findOne({id: entry.id}, function(err, existingInsta){
+          if(existingInsta){
+            console.log("Insta already exists " + existingInsta.id);
+          }else {
+            instagramCollection.insert(entry, function(error){
+              if(error){
+                console.log(error);
+              }else {
+                console.log("Inserted instagram to db");
+              }
+            });
+          }
+        });
       });
+    });
   }
   ig.tag_media_recent('fixitkw', {"limit":10}, hdl);
 
 }
-
   
 
 

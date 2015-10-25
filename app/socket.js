@@ -20,6 +20,9 @@ var secrets = require('./config/secrets');
 /* Creating server */
 var app = express();
 
+var apiController = require('./controllers/api');
+
+
 /**
  * Connect to MongoDB.
  */
@@ -83,12 +86,6 @@ db.once('open', function(){
     });
 });
 
-// db.once('open', function(){
-//     console.log("OPEN MONGO CONNECTION");
-//     mongoose.connection.db.collection("instagram", function (err, collection){
-//         instagramCollection = collection
-//     });
-// });
 
 //function to get last 10 tweets
 function getTweets(callback){

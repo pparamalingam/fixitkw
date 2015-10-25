@@ -618,7 +618,7 @@ exports.getInstagram = function(req, res, next) {
     async.each(result, function(item, callback) {
       // console.log(result.length);
       if (result[counter].location != null){
-        obj.push({id: result[counter].id, username: result[counter].user.username, full_name: result[counter].user.full_name, profile_pic: result[counter].user.profile_picture, text: result[counter].caption.text, tags: result[counter].tags, link: result[counter].link, latitude: result[counter].location.latitude, longitude: result[counter].location.longitude});
+        obj.push({id: result[counter].id, username: result[counter].user.username, full_name: result[counter].user.full_name, profile_pic: result[counter].user.profile_picture, image: result[counter].images.standard_resolution.url, text: result[counter].caption.text, tags: result[counter].tags, link: result[counter].link, latitude: result[counter].location.latitude, longitude: result[counter].location.longitude});
         console.log(result[counter]);
       }
       counter++

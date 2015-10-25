@@ -1,3 +1,15 @@
+$.ajax({
+  type: "GET",
+  url: "api/instagram",
+  dataType: "json",
+  success: function(data){
+    console.log(data[0].id);
+    // var json = jQuery.parseJSON(data);
+    data.forEach(function(entry){
+      $("#fucku").append(entry.id);  
+    }); 
+  }
+});
 
 
 var sid = [];

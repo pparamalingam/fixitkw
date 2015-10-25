@@ -1,19 +1,5 @@
 
 
-$.ajax({
-  type: "GET",
-  url: "api/instagram",
-  dataType: "json",
-  success: function(data){
-    console.log(data[0].id);
-    // var json = jQuery.parseJSON(data);
-    data.forEach(function(entry){
-      $("#fucku").append(entry.id);  
-    }); 
-  }
-});
-
-
 var sid = [];
 var map;
 function initMap() {
@@ -22,6 +8,33 @@ function initMap() {
     zoom: 10
   });
 }
+
+
+
+var hash = new Object();
+var callInsta = function() {
+    $.ajax({
+          type: "GET",
+          url: "api/instagram",
+          dataType: "json",
+          success: function(data){
+            // console.log(data[0].id);
+            data.forEach(function(entry){
+              if(hash[entry.id] == undefined){
+                $("#fucku").append(entry.id); 
+                hash[entry.id] = 1
+                sid.push({lng: entry.longitude, lat: entry.latitude});
+                console.log(sid);
+              }
+            }); 
+          }
+        });
+}
+
+callInsta();
+// setInterval(callInsta, 30000000);
+
+
 $(document).ready(function() {
 
     // Place JavaScript code here...
@@ -33,6 +46,8 @@ $(document).ready(function() {
 
     //On tweet event (when we receave a tweet)
     socket.on('tweet',function (tweet) {
+
+        callInsta();
 
         //Creating a li element
         var li = document.createElement("li");

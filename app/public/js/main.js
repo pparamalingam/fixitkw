@@ -1,15 +1,3 @@
-$.ajax({
-  type: "GET",
-  url: "api/instagram",
-  dataType: "json",
-  success: function(data){
-    console.log(data[0].id);
-    // var json = jQuery.parseJSON(data);
-    data.forEach(function(entry){
-      $("#fucku").append(entry.id);  
-    }); 
-  }
-});
 
 
 var sid = [];
@@ -66,7 +54,7 @@ var callInsta = function() {
             // console.log(data[0].id);
             data.forEach(function(entry){
               if(hash[entry.id] == undefined){
-                $("#fucku").append(entry.id); 
+                // $("#fucku").append(entry.id); 
                 hash[entry.id] = 1
                 sid.push({lng: entry.longitude, lat: entry.latitude});
                 console.log("Before setMarker method")

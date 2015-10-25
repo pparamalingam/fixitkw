@@ -20,8 +20,8 @@ function initMap() {
 dbtweets.forEach(function(entry){
     
     $('#tweets').append('<li id="'+entry._id.toString()+'">' + "<strong>" + entry.user.screen_name + ":</strong> " + entry.text + ", " + entry.coordinates.coordinates[1] + " " + entry.coordinates.coordinates[0] +'</li>');
-	var li = document.getElementById(entry._id);
-    li.addEventListener('click', openMarker(entry._id));
+	// var li = document.getElementById(entry._id);
+ //    li.addEventListener('click', openMarker(entry._id));
     setMarkerTweet(entry);
 });  
 }

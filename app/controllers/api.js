@@ -589,7 +589,6 @@ exports.getLinkedin = function(req, res, next) {
  */
 exports.getInstagram = function(req, res, next) {
   var obj = [];
-  var count = 0;
   ig = require('instagram-node').instagram();
 
 
@@ -599,22 +598,20 @@ exports.getInstagram = function(req, res, next) {
   // ig.use({ access_token: secrets.instagram.accessToken});
 
   var hdl = function(err, result, pagination, remaining, limit) {
-
+    var counter = 0
     async.each(result, function(item, callback) {
-
-      for (i=0; i<result.length; i++) {
-        if (result[i].location != null){
-          obj.push([result[i].location.latitude, result[i].location.longitude, result[i].name, result[i].username]);
-          console.log(result);
-
-        }
+      console.log(result.length);
+      if (result[counter].location != null){
+        obj.push(result[counter].user.username, result[counter].user.full_name, result[counter].link, result[counter].location.latitude, result[counter].location.longitude);
+        console.log(result[counter]);
       }
+      counter++
 
     // Your implementation here
       if(pagination.next) {
         pagination.next(hdl); // Will get second page results
       }
-    callback();
+      callback();
     
     },
     
@@ -624,37 +621,9 @@ exports.getInstagram = function(req, res, next) {
   }
   ig.tag_media_recent('fixitkw', hdl);
 
-
 }
 
   
-
-
-
-  // var midpoint = [{lat:43.459826, lon:-80.521550},
-  //     {lat:43.411087, lon:-80.475802}];
-
-    // var midpoint = [{lat:43.656134, lon:-79.380284}];
-      // {lat:, lon:}];
-
-  // async.each(midpoint, function(item, callback){
-  //   ig.media_search(item.lat, item.lon, {distance: 500},function(err, medias, remaining, limit){
-  //        console.log(medias)
-  //        console.log("Length: " + medias.length);
-
-  //        for (x=0; x<medias.length; x++){
-  //          obj.push([medias[x]]);
-  //        }
-  //        callback();
-  //       });
-  //   },
-  //   function(err){
-  //    res.status('api/instagram').send(
-  //    obj
-  //   );
-  //  });
-  // }
-
 
 
 

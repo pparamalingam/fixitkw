@@ -72,8 +72,9 @@ module.exports = {
   },
 
   twitter: {
-    consumerKey: process.env.TWITTER_KEY || '6NNBDyJ2TavL407A3lWxPFKBI',
-    consumerSecret: process.env.TWITTER_SECRET  || 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa',
+    accesstoken: '4032818050-gg2RdldEmDT9UAJmi7oQBs9UrNg1NwjMjrorbLo',
+    consumerKey: process.env.TWITTER_KEY || 'a7bNGd06DBFz1vFqYvvfcrVYZ',
+    consumerSecret: process.env.TWITTER_SECRET  || '0ocil7vMLRqfV6FlLs1Q0265SD6Q7MQ53UfwtAtAqUAPWZMpVT',
     callbackURL: '/auth/twitter/callback',
     passReqToCallback: true
   },

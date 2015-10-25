@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ed8bc4f20ffe7e1f7c67314ac3c3630f1c5f3885
 var sid = [];
 var map;
 function initMap() {

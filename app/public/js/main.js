@@ -5,6 +5,10 @@ function initMap() {
     center: {lat: 43.411087, lng: -80.475802},
     zoom: 10
   });
+
+dbtweets.forEach(function(entry){
+	setMarkerTweet(entry);
+});  
 }
 
 var setMarkerInsta = function(insta){
@@ -12,9 +16,9 @@ var setMarkerInsta = function(insta){
 	var image = {
 		url: 'images/insta_mark.png'
 	}
-	var gLatLng = new google.maps.LatLng(insta.latitude, insta.longitude);
+	var iLatLng = new google.maps.LatLng(insta.latitude, insta.longitude);
     var marker = new google.maps.Marker({
-		position: gLatLng,
+		position: iLatLng,
 		animation: google.maps.Animation.DROP,
 		title: 'Hello World!',
 		icon: image
@@ -42,38 +46,6 @@ var setMarkerInsta = function(insta){
 
 }
 
-// var setMarkerTweet = function(tweets){
-// 	var image = {
-// 		url: 'images/twitter_mark.png'
-// 	}
-// 	var gLatLng = new google.maps.LatLng(tweets.coordinates.coordinates[1],tweets.coordinates.coordinates[]);
-//     var marker = new google.maps.Marker({
-// 		position: gLatLng,
-// 		animation: google.maps.Animation.DROP,
-// 		title: 'Hello World!',
-// 		icon: image
-// 	}); 
-// 	var contentString = '<div id="content">'+
-// 	  '<div id="siteNotice">'+
-// 	  '</div>'+
-// 	  '<h1 id="firstHeading" class="firstHeading">'+ tweets.user.screen_name +'</h1>'+
-// 	  '<div id="bodyContent">'+
-// 	  '<img src="'+ tweets.user.profile_image_url +'" alt="Smiley face" height="150" width="150">' +
-// 	  '<p>'+ tweets.text +'</p>'+
-// 	  '</div>'+
-// 	  '</div>';
-
-// 	  var infowindow = new google.maps.InfoWindow({
-// 	    content: contentString
-// 	  });
-
-// 	  marker.addListener('click', function() {
-// 	    infowindow.open(map, marker);
-// 	  });
-
-// 	  marker.setMap(map);	
-
-// }
 
 var hash = new Object();
 var callInsta = function() {
@@ -97,14 +69,45 @@ var callInsta = function() {
         });
 }
 
+function setMarkerTweet(twoots){
+	var tLatLng
+	var image = {
+		url: 'images/twitter_mark.png'
+	}
+	tLatLng = new google.maps.LatLng(twoots.coordinates.coordinates[1], twoots.coordinates.coordinates[0]);
+    var marker = new google.maps.Marker({
+		position: tLatLng,
+		animation: google.maps.Animation.DROP,
+		title: 'Hello World!',
+		icon: image
+	}); 
+	var contentString = '<div id="content">'+
+	  '<div id="siteNotice">'+
+	  '</div>'+
+	  '<h1 id="firstHeading" class="firstHeading">'+ twoots.user.screen_name +'</h1>'+
+	  '<div id="bodyContent">'+
+	  '<img src="'+ twoots.user.profile_image_url +'" alt="Smiley face" height="150" width="150">' +
+	  '<p>'+ twoots.text +'</p>'+
+	  '</div>'+
+	  '</div>';
+
+	  var infowindow = new google.maps.InfoWindow({
+	    content: contentString
+	  });
+
+	  marker.addListener('click', function() {
+	    infowindow.open(map, marker);
+	  });
+
+	  marker.setMap(map);	
+
+}
+
 callInsta();
 // setInterval(callInsta, 30000000);
 console.log("dbtwets")
 console.log(dbtweets);
 
-// dbtweets.forEach(function(entry){
-// 	setMarkerTweet(entry);
-// });
 
 
 $(document).ready(function() {
@@ -134,10 +137,14 @@ $(document).ready(function() {
 
         var myLatlng = new google.maps.LatLng(tweet.coordinates.coordinates[1],tweet.coordinates.coordinates[0]);
 
+		var image = {
+			url: 'images/twitter_mark.png'
+		}
         var marker = new google.maps.Marker({
     		position: myLatlng,
     		animation: google.maps.Animation.DROP,
     		title: 'Hello World!',
+    		icon: image
   		});   
 
   		var contentString = '<div id="content">'+

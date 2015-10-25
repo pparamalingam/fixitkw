@@ -111,7 +111,7 @@ request.on('tweet', function (tweet) {
     //emit is to send data to client,We supplied tweet(json) as js object
     //Sockets will serialise tweet which is deserialised at client(template.html)
     io.sockets.emit("tweet",tweet);
-    /*
+
     tweetCollection.insert(tweet,function(error){
         if(error){
             console.log(error);
@@ -119,7 +119,7 @@ request.on('tweet', function (tweet) {
             console.log("Inserted into database");
         }
     });
-    */
+
     console.log(tweet.text);
     console.log("\n");
 })

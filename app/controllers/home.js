@@ -19,7 +19,7 @@ exports.index = function(req, res) {
                         console.log(tweets);
                         res.render('home', {
                             title: 'Home',
-                            tweets = tweets
+                            tweets : tweets
                         });
 
                     }

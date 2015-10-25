@@ -1,17 +1,3 @@
-$.ajax({
-  type: "GET",
-  url: "api/instagram",
-  dataType: "json",
-  success: function(data){
-    console.log(data[0].id);
-    // var json = jQuery.parseJSON(data);
-    data.forEach(function(entry){
-      $("#fucku").append(entry.id);  
-    }); 
-  }
-});
-
-
 var sid = [];
 var map;
 function initMap() {
@@ -21,8 +7,8 @@ function initMap() {
   });
 }
 
-var setMarker = function(insta){
-	console.log("We in the setMarker method")
+var setMarkerInsta = function(insta){
+	//console.log("We in the setMarker method")
 	var image = {
 		url: 'images/insta_mark.png'
 	}
@@ -40,7 +26,7 @@ var setMarker = function(insta){
   		'<div id="bodyContent">'+
   		'<img src="'+ insta.profile_pic +'" alt="Smiley face" height="150" width="150">' +
   		'<p>'+ insta.text +'</p>'+
-  		'<img src="'+ insta.imaged +'" alt="Smiley face" height="640" width="640">' +
+  		'<img src="'+ insta.image +'" alt="Smiley face" height="640" width="640">' +
   		'</div>'+
   		'</div>';
 
@@ -56,6 +42,39 @@ var setMarker = function(insta){
 
 }
 
+// var setMarkerTweet = function(tweets){
+// 	var image = {
+// 		url: 'images/twitter_mark.png'
+// 	}
+// 	var gLatLng = new google.maps.LatLng(tweets.coordinates.coordinates[1],tweets.coordinates.coordinates[]);
+//     var marker = new google.maps.Marker({
+// 		position: gLatLng,
+// 		animation: google.maps.Animation.DROP,
+// 		title: 'Hello World!',
+// 		icon: image
+// 	}); 
+// 	var contentString = '<div id="content">'+
+// 	  '<div id="siteNotice">'+
+// 	  '</div>'+
+// 	  '<h1 id="firstHeading" class="firstHeading">'+ tweets.user.screen_name +'</h1>'+
+// 	  '<div id="bodyContent">'+
+// 	  '<img src="'+ tweets.user.profile_image_url +'" alt="Smiley face" height="150" width="150">' +
+// 	  '<p>'+ tweets.text +'</p>'+
+// 	  '</div>'+
+// 	  '</div>';
+
+// 	  var infowindow = new google.maps.InfoWindow({
+// 	    content: contentString
+// 	  });
+
+// 	  marker.addListener('click', function() {
+// 	    infowindow.open(map, marker);
+// 	  });
+
+// 	  marker.setMap(map);	
+
+// }
+
 var hash = new Object();
 var callInsta = function() {
     $.ajax({
@@ -69,8 +88,8 @@ var callInsta = function() {
                 $("#fucku").append(entry.id); 
                 hash[entry.id] = 1
                 sid.push({lng: entry.longitude, lat: entry.latitude});
-                console.log("Before setMarker method")
-                setMarker(entry);
+                //console.log("Before setMarker method")
+                setMarkerInsta(entry);
                 console.log(sid);
               }
             }); 
@@ -80,6 +99,12 @@ var callInsta = function() {
 
 callInsta();
 // setInterval(callInsta, 30000000);
+console.log("dbtwets")
+console.log(dbtweets);
+
+// dbtweets.forEach(function(entry){
+// 	setMarkerTweet(entry);
+// });
 
 
 $(document).ready(function() {

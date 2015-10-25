@@ -295,9 +295,9 @@ exports.getTwitter = function(req, res, next) {
   var result = [];
   var data = [];
   // pull module and authentication
-  var Twitter = require('twitter');
+  var Twit = require('twit');
   var token = _.find(req.user.tokens, { kind: 'twitter' });
-  var client = new Twitter({
+  var client = new Twit({
     consumer_key: secrets.twitter.consumerKey,
     consumer_secret: secrets.twitter.consumerSecret,
     access_token_key: token.accessToken,
@@ -596,8 +596,7 @@ exports.getInstagram = function(req, res, next) {
   
 
   ig.use({ client_id: secrets.instagram.clientID, client_secret: secrets.instagram.clientSecret });
-  ig.use({ access_token: secrets.instagram.accessToken});
-
+  // ig.use({ access_token: secrets.instagram.accessToken});
 
   var hdl = function(err, result, pagination, remaining, limit) {
 
@@ -624,6 +623,7 @@ exports.getInstagram = function(req, res, next) {
       });
   }
   ig.tag_media_recent('fixitkw', hdl);
+
 }
 
   

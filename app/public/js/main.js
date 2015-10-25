@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ed8bc4f20ffe7e1f7c67314ac3c3630f1c5f3885
 var sid = [];
 var map;
 function initMap() {
@@ -85,7 +90,7 @@ var callInsta = function() {
             // console.log(data[0].id);
             data.forEach(function(entry){
               if(hash[entry.id] == undefined){
-                $("#fucku").append(entry.id); 
+                // $("#fucku").append(entry.id); 
                 hash[entry.id] = 1
                 sid.push({lng: entry.longitude, lat: entry.latitude});
                 //console.log("Before setMarker method")

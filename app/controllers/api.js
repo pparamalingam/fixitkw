@@ -589,6 +589,7 @@ exports.getLinkedin = function(req, res, next) {
  */
 exports.getInstagram = function(req, res, next) {
   var obj = [];
+
   ig = require('instagram-node').instagram();
 
 
@@ -600,9 +601,10 @@ exports.getInstagram = function(req, res, next) {
   var hdl = function(err, result, pagination, remaining, limit) {
     var counter = 0
     async.each(result, function(item, callback) {
-      console.log(result.length);
+      // console.log(result.length);
       if (result[counter].location != null){
-        obj.push(result[counter].user.username, result[counter].user.full_name, result[counter].link, result[counter].location.latitude, result[counter].location.longitude);
+        obj.push({id: result[counter].id});
+        // , result[counter].user.username, result[counter].user.full_name, result[counter].link, result[counter].location.latitude, result[counter].location.longitude
         console.log(result[counter]);
       }
       counter++
@@ -616,10 +618,10 @@ exports.getInstagram = function(req, res, next) {
     },
     
     function(err) {
-      res.status('api/instagram').send(obj)
+      res.status('api/instagram').send(obj);
       });
   }
-  ig.tag_media_recent('fixitkw', hdl);
+  ig.tag_media_recent('fixitkw', {"limit":10}, hdl);
 
 }
 

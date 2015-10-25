@@ -70,6 +70,7 @@ server.listen(port);
 
 //Variable to store table name
 var tweetCollection;
+// var instagramCollection;
 
 db.on('error', function(err){
     console.log("mongoose connection error: " + err );
@@ -81,6 +82,13 @@ db.once('open', function(){
         tweetCollection = collection
     });
 });
+
+// db.once('open', function(){
+//     console.log("OPEN MONGO CONNECTION");
+//     mongoose.connection.db.collection("instagram", function (err, collection){
+//         instagramCollection = collection
+//     });
+// });
 
 //function to get last 10 tweets
 function getTweets(callback){
@@ -140,6 +148,7 @@ request.on('tweet', function (tweet) {
         sendTweet(tweet.user.screen_name, tweet.id)
     }
 })
+
 
 
 

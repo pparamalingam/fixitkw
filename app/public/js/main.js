@@ -1,4 +1,18 @@
 
+$.ajax({
+  type: "GET",
+  url: "api/instagram",
+  dataType: "json",
+  success: function(data){
+    console.log(data[0].id);
+    // var json = jQuery.parseJSON(data);
+    data.forEach(function(entry){
+      $("#fucku").append(entry.id);  
+    }); 
+  }
+});
+
+
 var sid = [];
 var map;
 function initMap() {
@@ -15,7 +29,6 @@ $(document).ready(function() {
 
     //Accessing ul element on page 
     var ul = document.getElementById('tweets');
-
 
     //On tweet event (when we receave a tweet)
     socket.on('tweet',function (tweet) {

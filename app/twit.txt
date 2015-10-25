@@ -1,0 +1,127 @@
+> db.tweet.findOne()
+{
+        "_id" : ObjectId("562c537adb62192434d7e077"),
+        "created_at" : "Sun Oct 25 03:58:50 +0000 2015",
+        "id" : 658130571277803500,
+        "id_str" : "658130571277803520",
+        "text" : "Hebdndkdldkdbsbs #fixitkw",
+        "source" : "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+        "truncated" : false,
+        "in_reply_to_status_id" : null,
+        "in_reply_to_status_id_str" : null,
+        "in_reply_to_user_id" : null,
+        "in_reply_to_user_id_str" : null,
+        "in_reply_to_screen_name" : null,
+        "user" : {
+                "id" : 413451354,
+                "id_str" : "413451354",
+                "name" : "Sadisha Galappatti",
+                "screen_name" : "SadishaG",
+                "location" : "Canada ",
+                "url" : null,
+                "description" : "I like to be awesome, duh.",
+                "protected" : false,
+                "verified" : false,
+                "followers_count" : 196,
+                "friends_count" : 337,
+                "listed_count" : 3,
+                "favourites_count" : 1167,
+                "statuses_count" : 2529,
+                "created_at" : "Tue Nov 15 22:16:00 +0000 2011",
+                "utc_offset" : null,
+                "time_zone" : null,
+                "geo_enabled" : true,
+                "lang" : "en",
+                "contributors_enabled" : false,
+                "is_translator" : false,
+                "profile_background_color" : "C0DEED",
+                "profile_background_image_url" : "http://pbs.twimg.com/profile_background_images/823747701/41650b8e6ce05fe8419b566d85fa5adc.jpeg",
+                "profile_background_image_url_https" : "https://pbs.twimg.com/profile_background_images/823747701/41650b8e6ce05fe8419b566d85fa5adc.jpeg",
+                "profile_background_tile" : false,
+                "profile_link_color" : "0084B4",
+                "profile_sidebar_border_color" : "FFFFFF",
+                "profile_sidebar_fill_color" : "DDEEF6",
+                "profile_text_color" : "333333",
+                "profile_use_background_image" : true,
+                "profile_image_url" : "http://pbs.twimg.com/profile_images/3210188163/286aaeb92e4f58b15626d91c4aac6058_normal.jpeg",
+                "profile_image_url_https" : "https://pbs.twimg.com/profile_images/3210188163/286aaeb92e4f58b15626d91c4aac6058_normal.jpeg",
+                "profile_banner_url" : "https://pbs.twimg.com/profile_banners/413451354/1360041809",
+                "default_profile" : false,
+                "default_profile_image" : false,
+                "following" : null,
+                "follow_request_sent" : null,
+                "notifications" : null
+        },
+        "geo" : {
+                "type" : "Point",
+                "coordinates" : [
+                        43.4635765,
+                        -80.5257934
+                ]
+        },
+        "coordinates" : {
+                "type" : "Point",
+                "coordinates" : [
+                        -80.5257934,
+                        43.4635765
+                ]
+        },
+        "place" : {
+                "id" : "33ad9818da34b8ec",
+                "url" : "https://api.twitter.com/1.1/geo/id/33ad9818da34b8ec.json",
+                "place_type" : "city",
+                "name" : "Waterloo",
+                "full_name" : "Waterloo, Ontario",
+                "country_code" : "CA",
+                "country" : "Canada",
+                "bounding_box" : {
+                        "type" : "Polygon",
+                        "coordinates" : [
+                                [
+                                        [
+                                                -80.626184,
+                                                43.432944
+                                        ],
+                                        [
+                                                -80.626184,
+                                                43.531359
+                                        ],
+                                        [
+                                                -80.467648,
+                                                43.531359
+                                        ],
+                                        [
+                                                -80.467648,
+                                                43.432944
+                                        ]
+                                ]
+                        ]
+                },
+                "attributes" : {
+
+                }
+        },
+        "contributors" : null,
+        "is_quote_status" : false,
+        "retweet_count" : 0,
+        "favorite_count" : 0,
+        "entities" : {
+                "hashtags" : [
+                        {
+                                "text" : "fixitkw",
+                                "indices" : [
+                                        17,
+                                        25
+                                ]
+                        }
+                ],
+                "urls" : [ ],
+                "user_mentions" : [ ],
+                "symbols" : [ ]
+        },
+        "favorited" : false,
+        "retweeted" : false,
+        "filter_level" : "low",
+        "lang" : "tr",
+        "timestamp_ms" : "1445745530324"
+

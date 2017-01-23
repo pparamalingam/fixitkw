@@ -2,7 +2,7 @@ var sid = [];
 var map;
 
 var markers = new Object();
-
+ 
 
 
 function initMap() {
